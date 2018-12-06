@@ -4,16 +4,16 @@
 
     <!-- GOALS INDEX - LINK TO SHOW -->
     <div class="container">
-      <div class="row mt-3 mb-3">
-        <div v-for="goal in goals" class="col-3 mt-3 mb-3" v-bind:key="goal.id">
+      <div class="row mb-3 mt-3">
+        <div v-for="goal in goals" class="col-4 mb-3 mt-3" v-bind:key="goal.id">
           <div class="card" style="width: 18rem;">
             <!-- <img class="" v-bind:src="" alt="Card image cap" /> -->
             <div class="card-body">
               <h3 class="card-subject">{{ goal.subject }}</h3>
-              <p class="card-body">$ {{ goal.body }}</p>
+              <p class="card-body">{{ goal.body }}</p>
               <p class="card-start_date">{{ goal.start_date }}</p>
               <p class="card-start_date">{{ goal.end_date }}</p>
-              <a v-bind:href="`#/goals/${goal.id}`" class="btn btn-primary">Goals Request</a>
+              <a v-bind:href="`#/goals/${goal.id}`" class="btn btn-primary">See Requests</a>
             </div>
           </div>
         </div>
