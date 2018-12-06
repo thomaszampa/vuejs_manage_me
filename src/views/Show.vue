@@ -22,7 +22,13 @@ export default {
   data: function() {
     return {
       goal: {},
-      request: []
+      request: [],
+      body: "",
+      timeStamp: "",
+      dueDate: "",
+      overDue: "",
+      complete: "",
+      errors: []
     };
   },
   created: function() {
