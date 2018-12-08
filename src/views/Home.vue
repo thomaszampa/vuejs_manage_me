@@ -1,10 +1,8 @@
 <template>
   <div class="home">
-    <h1>{{ "MANAGE.ME" }}</h1>
-
     <!-- GOALS INDEX - LINK TO SHOW -->
     <div class="container">
-      <div class="row mb-3 mt-3">
+      <div class="row">
         <div v-for="goal in goals" class="col-4 mb-3 mt-3" v-bind:key="goal.id">
           <div class="card" style="width: 18rem;">
             <!-- <img class="" v-bind:src="" alt="Card image cap" /> -->
@@ -43,6 +41,7 @@ export default {
       }.bind(this)
     );
   },
+
   methods: {},
   computed: {}
 };
