@@ -5,7 +5,6 @@
       <div class="row">
         <div v-for="goal in goals" class="col-4 mb-3 mt-3" v-bind:key="goal.id">
           <div class="card" style="width: 18rem;">
-            <!-- <img class="" v-bind:src="" alt="Card image cap" /> -->
             <div class="card-body">
               <h3 class="card-subject">{{ goal.subject }}</h3>
               <p class="card-body">{{ goal.body }}</p>
@@ -17,7 +16,34 @@
         </div>
       </div>
     </div>
-    <!-- ... -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">New Goal</button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New Goal</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

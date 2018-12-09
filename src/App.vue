@@ -20,8 +20,12 @@
         </div>
       </div>
     </nav>
-    <span class="d-block p-4 bg-dark text-white"></span>
+    <div>
+      <span class="d-block p-4 bg-dark text-white">Ooooowweee, Will ya look at this spiffy demo - Ooaahhhhhboy</span>
+      <span class="d-block p-4 white text-white"></span>
+    </div>
     <router-view />
+    <div><span class="d-block p-4 white text-white"></span><span class="d-block p-4 bg-dark text-white"></span></div>
   </div>
 </template>
 
