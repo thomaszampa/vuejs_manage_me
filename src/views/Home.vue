@@ -19,27 +19,74 @@
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">New Goal</button>
 
-    <!-- Modal -->
+    <!-- GOAL CREATE MODAL -->
     <div
       class="modal fade"
       id="exampleModal"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="goalCreateModal"
       aria-hidden="true"
     >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">New Goal</h5>
+            <h5 class="modal-title" id="goalCreateModal">New Goal</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">...</div>
+          <!-- GOAL CREATE FORM -->
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="newGoalSubject">Subject</label>
+                <input
+                  v-model="newGoalSubject"
+                  type="text"
+                  class="form-control"
+                  id="InputSubject"
+                  aria-describedby="subjectHelp"
+                  placeholder="Enter subject"
+                />
+              </div>
+              <div class="form-group">
+                <label for="newGoalBody">Body</label>
+                <input v-model="newGoalBody" type="text" class="form-control" id="InputBody" placeholder="Enter Body" />
+              </div>
+              <!-- DATE TIME SELETOR -->
+              <div class="form-group">
+                <label for="newGoalStartDatew">Start Date</label>
+                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                  <input
+                    v-model="newGoalStartDate"
+                    type="text"
+                    class="form-control datetimepicker-input"
+                    data-target="#datetimepicker1"
+                  />
+                  <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="newGoalEndDate">End Date</label>
+                <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                  <input
+                    v-model="newGoalEndDate"
+                    type="text"
+                    class="form-control datetimepicker-input"
+                    data-target="#datetimepicker2"
+                  />
+                  <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Create</button>
+            <button v-on:click="createGoal();" type="button" class="btn btn-primary">Create</button>
           </div>
         </div>
       </div>
@@ -49,6 +96,13 @@
 
 <style></style>
 
+<script type="text/javascript">
+$(function() {
+  $("#datetimepicker1").datetimepicker();
+  $("#datetimepicker2").datetimepicker();
+});
+</script>
+
 <script>
 import axios from "axios";
 
@@ -56,7 +110,12 @@ export default {
   data: function() {
     return {
       message: "manage.me",
-      goals: []
+      goals: [],
+      newGoalSubject: "",
+      newGoalBody: "",
+      newGoalStartDate: "",
+      newGoalEndDate: "",
+      errors: []
     };
   },
   created: function() {
@@ -67,8 +126,37 @@ export default {
       }.bind(this)
     );
   },
-
-  methods: {},
-  computed: {}
+  methods: {
+    createGoal() {
+      console.log("createGoal");
+      this.errors = [];
+      var params = {
+        user_id: 1,
+        relationship_id: 1,
+        subject: this.newGoalSubject,
+        body: this.newGoalBody,
+        start_date: this.newGoalStartDate,
+        end_date: this.newGoalEndDate
+      };
+      axios
+        .post("http://localhost:3000/api/goals", params)
+        .then(
+          function(response) {
+            console.log(response);
+            this.goal.push(response.data);
+            this.newGoalSubject = "";
+            this.newGoalBody = "";
+            this.newGoalStartDate = "";
+            this.newGoalEndDate = "";
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            console.log(error.response.data.errors);
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    }
+  }
 };
 </script>
