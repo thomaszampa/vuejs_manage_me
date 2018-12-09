@@ -131,8 +131,8 @@ export default {
       console.log("createGoal");
       this.errors = [];
       var params = {
-        user_id: 1,
-        relationship_id: 1,
+        user_id: this.current_user.id,
+        relationship_id: this.current_user.relationship_id,
         subject: this.newGoalSubject,
         body: this.newGoalBody,
         start_date: this.newGoalStartDate,
