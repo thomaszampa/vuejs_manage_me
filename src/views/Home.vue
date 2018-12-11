@@ -9,7 +9,7 @@
               <h3 class="card-subject">{{ goal.subject }}</h3>
               <p class="card-body">{{ goal.body }}</p>
               <p class="card-start_date">{{ goal.start_date }}</p>
-              <p class="card-start_date">{{ goal.end_date }}</p>
+              <p class="card-end_date">{{ goal.end_date }}</p>
               <a v-bind:href="`#/goals/${goal.id}`" class="btn btn-primary">See Requests</a>
             </div>
           </div>
@@ -56,10 +56,10 @@
               </div>
               <!-- DATE TIME SELETOR -->
               <div class="form-group">
-                <label for="newGoalStartDatew">Start Date</label>
+                <label for="newGoalStartDate">Start Date</label>
                 <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                   <input
-                    v-model="newGoalStartDate"
+                    id="newGoalStartDate"
                     type="text"
                     class="form-control datetimepicker-input"
                     data-target="#datetimepicker1"
@@ -73,7 +73,7 @@
                 <label for="newGoalEndDate">End Date</label>
                 <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                   <input
-                    v-model="newGoalEndDate"
+                    id="newGoalEndDate"
                     type="text"
                     class="form-control datetimepicker-input"
                     data-target="#datetimepicker2"
@@ -86,7 +86,9 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button v-on:click="createGoal();" type="button" class="btn btn-primary">Create</button>
+            <button v-on:click="createGoal();" type="button" class="btn btn-primary" data-dismiss="modal">
+              Create
+            </button>
           </div>
         </div>
       </div>
@@ -95,13 +97,6 @@
 </template>
 
 <style></style>
-
-<script type="text/javascript">
-$(function() {
-  $("#datetimepicker1").datetimepicker();
-  $("#datetimepicker2").datetimepicker();
-});
-</script>
 
 <script>
 import axios from "axios";
@@ -119,6 +114,8 @@ export default {
     };
   },
   created: function() {
+    $("#datetimepicker1").datetimepicker();
+    $("#datetimepicker2").datetimepicker();
     axios.get("http://localhost:3000/api/goals").then(
       function(response) {
         console.log(response.data);
@@ -130,20 +127,20 @@ export default {
     createGoal() {
       console.log("createGoal");
       this.errors = [];
+
       var params = {
-        user_id: this.current_user.id,
-        relationship_id: this.current_user.relationship_id,
         subject: this.newGoalSubject,
         body: this.newGoalBody,
-        start_date: this.newGoalStartDate,
-        end_date: this.newGoalEndDate
+        start_date: document.getElementById("newGoalStartDate").value,
+        end_date: document.getElementById("newGoalEndDate").value
       };
+      console.log(params);
       axios
         .post("http://localhost:3000/api/goals", params)
         .then(
           function(response) {
             console.log(response);
-            this.goal.push(response.data);
+            this.goals.push(response.data);
             this.newGoalSubject = "";
             this.newGoalBody = "";
             this.newGoalStartDate = "";
@@ -152,7 +149,7 @@ export default {
         )
         .catch(
           function(error) {
-            console.log(error.response.data.errors);
+            console.log(error);
             this.errors = error.response.data.errors;
           }.bind(this)
         );
