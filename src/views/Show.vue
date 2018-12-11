@@ -18,7 +18,6 @@
         </div>
       </div>
     </div>
-    <div><a href="/#/" class="btn btn-primary">Back to all Goals</a></div>
     <!-- REQUEST CREATE MODAL -->
     <div
       class="modal fade"
@@ -31,7 +30,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="goalCreateModal">New Goal</h5>
+            <h5 class="modal-title" id="requestCreateModal">New Request</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -40,26 +39,21 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="newGoalSubject">Subject</label>
+                <label for="newRequestBody">Body</label>
                 <input
-                  v-model="newGoalSubject"
+                  v-model="newRequestBody"
                   type="text"
                   class="form-control"
-                  id="InputSubject"
-                  aria-describedby="subjectHelp"
-                  placeholder="Enter subject"
+                  id="InputBody"
+                  placeholder="Enter Body"
                 />
-              </div>
-              <div class="form-group">
-                <label for="newGoalBody">Body</label>
-                <input v-model="newGoalBody" type="text" class="form-control" id="InputBody" placeholder="Enter Body" />
               </div>
               <!-- DATE TIME SELETOR -->
               <div class="form-group">
-                <label for="newGoalStartDatew">Start Date</label>
+                <label for="newRequestDueDate">Due Date</label>
                 <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                   <input
-                    v-model="newGoalStartDate"
+                    id="newRequestDueDate"
                     type="text"
                     class="form-control datetimepicker-input"
                     data-target="#datetimepicker1"
@@ -69,28 +63,22 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="newGoalEndDate">End Date</label>
-                <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                  <input
-                    v-model="newGoalEndDate"
-                    type="text"
-                    class="form-control datetimepicker-input"
-                    data-target="#datetimepicker2"
-                  />
-                  <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                  </div>
-                </div>
-              </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button v-on:click="createGoal();" type="button" class="btn btn-primary">Create</button>
+            <button v-on:click="createGoal();" type="button" class="btn btn-primary" data-dismiss="modal">
+              Create
+            </button>
           </div>
         </div>
       </div>
     </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#exampleModal">
+      New Request
+    </button>
+    <!-- BACK BUTTON -->
+    <div><a href="/#/" class="btn btn-primary">Back to all Goals</a></div>
   </div>
 </template>
 
@@ -104,14 +92,16 @@ export default {
     return {
       goal: {},
       requests: [],
+      newRequestBody: "",
+      newRequestDueDate: "",
       errors: []
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/goals/" + this.$route.params.id).then(
+    axios.get("http://localhost:3000/api/requests/" + this.$route.params.id).then(
       function(response) {
         console.log(response.data);
-        this.goal = response.data;
+        this.request = response.data;
       }.bind(this)
     );
   },

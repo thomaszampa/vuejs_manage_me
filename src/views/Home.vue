@@ -114,14 +114,16 @@ export default {
     };
   },
   created: function() {
-    $("#datetimepicker1").datetimepicker();
-    $("#datetimepicker2").datetimepicker();
     axios.get("http://localhost:3000/api/goals").then(
       function(response) {
         console.log(response.data);
         this.goals = response.data;
       }.bind(this)
     );
+  },
+  mounted: function() {
+    $("#datetimepicker1").datetimepicker({ format: "DD/MM/YY HH:mm" });
+    $("#datetimepicker2").datetimepicker({ format: "DD/MM/YY HH:mm" });
   },
   methods: {
     createGoal() {
