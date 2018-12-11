@@ -66,7 +66,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button v-on:click="createGoal();" type="button" class="btn btn-primary" data-dismiss="modal">
+            <button v-on:click="createRequest();" type="button" class="btn btn-primary" data-dismiss="modal">
               Create
             </button>
           </div>
@@ -98,12 +98,15 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/requests/" + this.$route.params.id).then(
+    axios.get("http://localhost:3000/api/goals/" + this.$route.params.id).then(
       function(response) {
         console.log(response.data);
-        this.request = response.data;
+        this.goal = response.data;
       }.bind(this)
     );
+  },
+  mounted: function() {
+    $("#datetimepicker1").datetimepicker({ format: "DD/MM/YY HH:mm" });
   },
   methods: {},
   computed: {}
