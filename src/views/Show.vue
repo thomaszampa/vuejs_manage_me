@@ -92,6 +92,7 @@ export default {
     return {
       goal: {},
       requests: [],
+      newRequestGoalId: "",
       newRequestBody: "",
       newRequestDueDate: "",
       errors: []
@@ -108,7 +109,36 @@ export default {
   mounted: function() {
     $("#datetimepicker1").datetimepicker({ format: "DD/MM/YY HH:mm" });
   },
-  methods: {},
+  methods: {
+    createRequest() {
+      console.log("createRequest");
+      this.errors = [];
+
+      var params = {
+        goal_id: this.goal.id,
+        body: this.newRequestBody,
+        due_date: document.getElementById("newRequestDueDate").value
+      };
+      console.log(params);
+      axios
+        .post("http://localhost:3000/api/requests", params)
+        .then(
+          function(response) {
+            console.log(response);
+            this.request.push(response.data);
+            this.newRequestGoalId = "";
+            this.newRequestBody = "";
+            this.newRequestDueDate = "";
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            console.log(error);
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    }
+  },
   computed: {}
 };
 </script>
