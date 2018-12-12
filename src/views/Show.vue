@@ -63,6 +63,11 @@
                   </div>
                 </div>
               </div>
+              <!-- ATTACHMENT SELECTOR -->
+              <div class="form-group">
+                <label for="newRequestAttachment">Attachment</label>
+                <input type="file" v-on:change="setFile($event);" ref="fileInput" />
+              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -95,6 +100,7 @@ export default {
       newRequestGoalId: "",
       newRequestBody: "",
       newRequestDueDate: "",
+      newRequestAttachment: "",
       errors: []
     };
   },
@@ -110,15 +116,28 @@ export default {
     $("#datetimepicker1").datetimepicker({ format: "DD/MM/YY HH:mm" });
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.newRequestAttachment = event.target.files[0];
+        console.log("newRequestAttachment", this.newRequestAttachment);
+      }
+    },
     createRequest() {
       console.log("createRequest");
       this.errors = [];
 
-      var params = {
-        goal_id: this.goal.id,
-        body: this.newRequestBody,
-        due_date: document.getElementById("newRequestDueDate").value
-      };
+      // var params = {
+      //   goal_id: this.goal.id,
+      //   body: this.newRequestBody,
+      //   due_date: document.getElementById("newRequestDueDate").value
+      // };
+
+      var formData = new FormData();
+      formData.append("goal_id", this.goal.id);
+      formData.append("body", this.newRequestBody);
+      formData.append("due_date", document.getElementById("newRequestDueDate").value);
+      formData.append("request_attachment", this.newRequestAttachment);
+
       console.log(params);
       axios
         .post("http://localhost:3000/api/requests", params)
