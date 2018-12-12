@@ -5,6 +5,7 @@ import Show from "./views/Show.vue";
 import Signup from "./views/Signup.vue";
 import Login from "./views/Login.vue";
 import Logout from "./views/Logout.vue";
+import Update from "./views/goalUpdate.vue";
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
       path: "/goals/:id",
       name: "show",
       component: Show
+    },
+    {
+      path: "/goals/update/:id",
+      name: "update",
+      component: Update
     }
   ]
 });

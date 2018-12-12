@@ -10,7 +10,8 @@
               <p class="card-body">{{ goal.body }}</p>
               <p class="card-start_date">{{ goal.start_date }}</p>
               <p class="card-end_date">{{ goal.end_date }}</p>
-              <a v-bind:href="`#/goals/${goal.id}`" class="btn btn-primary">See Requests</a>
+              <a v-bind:href="`#/goals/update/${goal.id}`" class="btn btn-primary">Edit Goal</a><br />
+              <a v-bind:href="`#/goals/${goal.id}`" class="btn btn-primary mb-3 mt-3">See Requests</a>
             </div>
           </div>
         </div>
