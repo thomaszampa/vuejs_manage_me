@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <!-- Page Header -->
+    
     <!-- GOALS INDEX - LINK TO SHOW -->
     <div class="container">
       <div class="row">
@@ -97,7 +99,8 @@
   </div>
 </template>
 
-<style></style>
+<style>
+</style>
 
 <script>
 import axios from "axios";

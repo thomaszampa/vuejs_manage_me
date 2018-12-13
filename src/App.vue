@@ -215,7 +215,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a v-on:click="logout();" href="/#/login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -239,7 +239,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Home</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -267,7 +267,9 @@
         </nav>
 
         <div id="page-wrapper">
+
           <router-view />
+
         </div>
         <!-- /#page-wrapper -->
 
@@ -278,3 +280,18 @@
 
 <style>
 </style>
+
+<script>
+import axios from "axios";
+
+export default {
+  methods: {
+    logout: function() {
+      delete axios.defaults.headers.common["Authorization"];
+      localStorage.removeItem("jwt");
+      this.$router.push("/");
+      console.log("You have successfully logged out!");
+    }
+  }
+};
+</script>
