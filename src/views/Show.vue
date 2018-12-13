@@ -148,6 +148,7 @@ export default {
             this.newRequestGoalId = "";
             this.newRequestBody = "";
             this.newRequestDueDate = "";
+            this.newRequestAttachment = "";
           }.bind(this)
         )
         .catch(
