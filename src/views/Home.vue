@@ -1,18 +1,109 @@
 <template>
   <div class="home">
-    <!-- Page Header -->
-   <div class="row">
+    <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Welcome -- Let's get this bread!</h1>
+            <h1 class="page-header"><strong>Dashboard</strong></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    <!-- Collapsible Panel -->
+    <!-- Header Panels -->
     <div class="row">
-      <div class="col-lg-12">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{ goals.length }}</div>
+                            <div>New Goals!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">26</div>
+                            <div>New Requests!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">124</div>
+                            <div>TBD!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-support fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">13</div>
+                            <div>Overdue Requests!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Collapsible Panel & Notification Feed -->
+    <div class="row">
+      <!-- Collapsible Goals Feed -->
+      <div class="col-md-8">
           <div class="panel panel-default">
               <div class="panel-heading">
-                  Collapsible Accordion Panel Group
+                  <strong>GOALS</strong>
               </div>
               <!-- .panel-heading -->
               <div class="panel-body">
@@ -20,12 +111,12 @@
                       <div class="panel panel-default">
                           <div class="panel-heading">
                               <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                  <a data-toggle="collapse" data-parent="#accordion" :href="['#collapseOne' + goal.id]">
                                   {{ goal.subject }}
                                   </a>
                               </h4>
                           </div>
-                          <div id="collapseOne" class="panel-collapse collapse in">
+                          <div :id="['collapseOne' + goal.id]" class="panel-collapse collapse in">
                               <div class="panel-body">
                                   {{ goal.body }}
                               </div>
@@ -35,11 +126,8 @@
               </div>
               <!-- .panel-body -->
           </div>
-          <!-- /.panel -->
       </div>
-    </div>
-      <!-- Notification Panel -->
-    <div class="row">
+      <!-- Notification Feed -->
       <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -99,11 +187,8 @@
             </div>
             <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
       </div>
     </div>
-      <!-- /.col-lg-4 -->
-
     <!-- GOALS INDEX - LINK TO SHOW -->
     <div class="container">
       <div class="row">
