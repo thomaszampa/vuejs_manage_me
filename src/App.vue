@@ -237,7 +237,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -283,13 +283,13 @@
 import axios from "axios";
 
 export default {
-  methods: {
-    logout: function() {
-      delete axios.defaults.headers.common["Authorization"];
-      localStorage.removeItem("jwt");
-      this.$router.push("/");
-      console.log("You have successfully logged out!");
+    methods: {
+        logout: function() {
+            delete axios.defaults.headers.common["Authorization"];
+            localStorage.removeItem("jwt");
+            this.$router.push("/");
+            console.log("You have successfully logged out!");
+        }
     }
-  }
 };
 </script>

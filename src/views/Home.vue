@@ -1,8 +1,9 @@
 <template>
   <div class="home">
+    <!-- Home Header -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><strong>Dashboard</strong></h1>
+            <h1 class="page-header"><strong>Home</strong></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -35,7 +36,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
+                            <i class="fa fa-tags fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">26</div>
@@ -79,7 +80,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-support fa-5x"></i>
+                            <i class="fa fa-exclamation-triangle fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">13</div>
@@ -113,18 +114,19 @@
                               <h4 class="panel-title">
                                   <a data-toggle="collapse" data-parent="#accordion" :href="['#collapseOne' + goal.id]">
                                   {{ goal.subject }}
+                                  <button v-on:click="redirectToRequests(goal);" class="pull-right btn btn-primary btn-xs">Requests</button> 
                                   </a>
-                              </h4>
+                              </h4>                           
                           </div>
                           <div :id="['collapseOne' + goal.id]" class="panel-collapse collapse in">
                               <div class="panel-body">
                                   {{ goal.body }}
                                 <div class="pull-right text-muted small">
-                                  <em>Began: {{ goal.start_date }}</em>
+                                  <em>Began: {{ formatDate(goal.start_date) }}</em>
                                 </div><br>
                                 <div class="pull-right text-muted small">
-                                  <em>Completed By: {{ goal.end_date }}</em>
-                                </div>                                  
+                                  <em>Completed By: {{ formatDate(goal.end_date) }}</em>
+                                </div>                              
                               </div>
 
                           </div>
@@ -195,101 +197,101 @@
             <!-- /.panel-body -->
         </div>
       </div>
-    </div>
-    <!-- GOALS INDEX - LINK TO SHOW -->
-    <div class="container">
-      <div class="row">
-        <div v-for="goal in goals" class="col-4 mb-3 mt-3" v-bind:key="goal.id">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h3 class="card-subject">{{ goal.subject }}</h3>
-              <p class="card-body">{{ goal.body }}</p>
-              <p class="card-start_date">{{ goal.start_date }}</p>
-              <p class="card-end_date">{{ goal.end_date }}</p>
-              <a v-bind:href="`#/goals/update/${goal.id}`" class="btn btn-primary">Edit Goal</a><br />
-              <a v-bind:href="`#/goals/${goal.id}`" class="btn btn-primary mb-3 mt-3">See Requests</a>
+      </div>
+      <!-- GOALS INDEX - LINK TO SHOW -->
+      <div class="container">
+        <div class="row">
+          <div v-for="goal in goals" class="col-4 mb-3 mt-3" v-bind:key="goal.id">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h3 class="card-subject">{{ goal.subject }}</h3>
+                <p class="card-body">{{ goal.body }}</p>
+                <p class="card-start_date">{{ goal.start_date }}</p>
+                <p class="card-end_date">{{ goal.end_date }}</p>
+                <a v-bind:href="`#/goals/update/${goal.id}`" class="btn btn-primary">Edit Goal</a><br />
+                <a v-bind:href="`#/goals/${goal.id}`" class="btn btn-primary mb-3 mt-3">See Requests</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">New Goal</button>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">New Goal</button>
 
-    <!-- GOAL CREATE MODAL -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="goalCreateModal"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="goalCreateModal">New Goal</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <!-- GOAL CREATE FORM -->
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="newGoalSubject">Subject</label>
-                <input
-                  v-model="newGoalSubject"
-                  type="text"
-                  class="form-control"
-                  id="InputSubject"
-                  aria-describedby="subjectHelp"
-                  placeholder="Enter subject"
-                />
-              </div>
-              <div class="form-group">
-                <label for="newGoalBody">Body</label>
-                <input v-model="newGoalBody" type="text" class="form-control" id="InputBody" placeholder="Enter Body" />
-              </div>
-              <!-- DATE TIME SELETOR -->
-              <div class="form-group">
-                <label for="newGoalStartDate">Start Date</label>
-                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+      <!-- GOAL CREATE MODAL -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="goalCreateModal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="goalCreateModal">New Goal</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!-- GOAL CREATE FORM -->
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="newGoalSubject">Subject</label>
                   <input
-                    id="newGoalStartDate"
+                    v-model="newGoalSubject"
                     type="text"
-                    class="form-control datetimepicker-input"
-                    data-target="#datetimepicker1"
+                    class="form-control"
+                    id="InputSubject"
+                    aria-describedby="subjectHelp"
+                    placeholder="Enter subject"
                   />
-                  <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+                <div class="form-group">
+                  <label for="newGoalBody">Body</label>
+                  <input v-model="newGoalBody" type="text" class="form-control" id="InputBody" placeholder="Enter Body" />
+                </div>
+                <!-- DATE TIME SELETOR -->
+                <div class="form-group">
+                  <label for="newGoalStartDate">Start Date</label>
+                  <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                    <input
+                      id="newGoalStartDate"
+                      type="text"
+                      class="form-control datetimepicker-input"
+                      data-target="#datetimepicker1"
+                    />
+                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="newGoalEndDate">End Date</label>
-                <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                  <input
-                    id="newGoalEndDate"
-                    type="text"
-                    class="form-control datetimepicker-input"
-                    data-target="#datetimepicker2"
-                  />
-                  <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                <div class="form-group">
+                  <label for="newGoalEndDate">End Date</label>
+                  <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                    <input
+                      id="newGoalEndDate"
+                      type="text"
+                      class="form-control datetimepicker-input"
+                      data-target="#datetimepicker2"
+                    />
+                    <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button v-on:click="createGoal();" type="button" class="btn btn-primary" data-dismiss="modal">
-              Create
-            </button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button v-on:click="createGoal();" type="button" class="btn btn-primary" data-dismiss="modal">
+                Create
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -323,6 +325,7 @@ export default {
     $("#datetimepicker1").datetimepicker({ format: "DD/MM/YY HH:mm" });
     $("#datetimepicker2").datetimepicker({ format: "DD/MM/YY HH:mm" });
   },
+
   methods: {
     createGoal() {
       console.log("createGoal");
@@ -353,6 +356,12 @@ export default {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
+    },
+    formatDate(date) {
+      return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+    },
+    redirectToRequests(goal) {
+      this.$router.push("/goals/" + `${goal.id}`);
     }
   }
 };
