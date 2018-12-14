@@ -119,7 +119,14 @@
                           <div :id="['collapseOne' + goal.id]" class="panel-collapse collapse in">
                               <div class="panel-body">
                                   {{ goal.body }}
+                                <div class="pull-right text-muted small">
+                                  <em>Began: {{ goal.start_date }}</em>
+                                </div><br>
+                                <div class="pull-right text-muted small">
+                                  <em>Completed By: {{ goal.end_date }}</em>
+                                </div>                                  
                               </div>
+
                           </div>
                       </div>
                   </div>
