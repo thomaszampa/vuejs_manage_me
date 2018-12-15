@@ -10,7 +10,7 @@
     <!-- Header Panels -->
     <div class="row">
         <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
+            <div class="panel panel-yellow">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
@@ -54,15 +54,15 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow">
+            <div class="panel panel-green">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-5x"></i>
+                            <i class="fa fa-spotify fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">124</div>
-                            <div>TBD!</div>
+                            <div>New Followers!</div>
                         </div>
                     </div>
                 </div>
@@ -98,14 +98,13 @@
             </div>
         </div>
     </div>
-    <!-- Collapsible Panel & Notification Feed -->
+    <!-- Collapsible Panel -->
     <div class="row">
       <!-- Collapsible Goals Feed -->
       <div class="col-md-8">
           <div class="panel panel-default">
               <div class="panel-heading">
-                  <strong>GOALS</strong>
-                  <button type="button" class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModal">New Goal</button>
+                <strong>GOALS</strong>
               </div>
               <!-- .panel-heading -->
               <div class="panel-body">
@@ -133,30 +132,15 @@
                           </div>
                       </div>
                   </div>
+                  <button type="button" class="pull-right btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">New Goal</button>
               </div>
               <!-- .panel-body -->
           </div>
       </div>
-    </div>
-    <!-- GOALS INDEX - LINK TO SHOW -->
-<!--     <div class="container">
-      <div class="row">
-        <div v-for="goal in goals" class="col-4 mb-3 mt-3" v-bind:key="goal.id">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h3 class="card-subject">{{ goal.subject }}</h3>
-              <p class="card-body">{{ goal.body }}</p>
-              <p class="card-start_date">{{ goal.start_date }}</p>
-              <p class="card-end_date">{{ goal.end_date }}</p>
-              <a v-bind:href="`#/goals/update/${goal.id}`" class="btn btn-primary">Edit Goal</a><br />
-              <a v-bind:href="`#/goals/${goal.id}`" class="btn btn-primary mb-3 mt-3">See Requests</a>
-            </div>
-          </div>
-        </div>
+      <div class="col-md-4">
+        {{ myDoughnutChart }}
       </div>
-    </div> -->
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">New Goal</button>
+    </div>
 
     <!-- GOAL CREATE MODAL -->
     <div
@@ -170,10 +154,10 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="goalCreateModal">New Goal</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+            <h5 class="modal-title huge" id="goalCreateModal"><strong>New Goal</strong></h5>
           </div>
           <!-- GOAL CREATE FORM -->
           <div class="modal-body">
@@ -240,6 +224,7 @@
 
 <script>
 import axios from "axios";
+import Chart from "chart.js";
 
 export default {
   data: function() {
@@ -302,6 +287,23 @@ export default {
     },
     redirectToRequests(goal) {
       this.$router.push("/goals/" + `${goal.id}`);
+    },
+    createNewDoughnutChart() {
+      var myDoughnutChart = new Chart(ctx, {
+        type: "doughnut",
+        data: data,
+        options: options
+      });
+      data = {
+        datasets: [
+          {
+            data: [10, 20, 30]
+          }
+        ],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: ["Red", "Yellow", "Blue"]
+      };
     }
   }
 };

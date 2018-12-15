@@ -1,22 +1,54 @@
 <template>
   <div class="show">
-    <!-- TITLE -->
-    <div>
-      <h1>{{ goal.subject }}</h1>
-    </div>
-    <!-- REQUEST INDEX -->
-    <div class="container" align="center">
-      <div class="row">
-        <div v-for="request in goal.requests" class="mt-3 mb-3" v-bind:key="request.id">
-          <div class="card" style="width: 75rem;">
-            <div class="card-body">
-              <h5 class="card-title">{{ request.body }}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Request made at: {{ request.time_stamp }}</h6>
-              <h6 class="mb-2">Due: {{ request.due_date }}</h6>
-            </div>
-          </div>
+    <!-- Show Header -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+              <strong>{{ goal.subject }}</strong>
+              <a href="/#/" class="btn btn-primary pull-right">Back</a>
+            </h1>       
         </div>
-      </div>
+        
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- PROGRESS BAR -->
+    <div>
+      <p>
+        <strong>Progress</strong><br>
+        <span class="text-muted"><em>40% Complete</em></span><br>
+      </p>
+        <div class="progress progress-striped active">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                <span class="sr-only">40% Complete (success)</span>
+            </div>
+        </div>
+    </div>
+    <!-- REQUEST INDEX TIMELINE -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-clock-o fa-fw"></i><strong>Request Timeline</strong>
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <ul class="timeline">
+                <li v-for="request in goal.requests">
+                    <div class="timeline-badge"><i class="fa fa-check"></i>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title">{{ request.body }}</h4>
+                            <small><i class="fa fa-clock-o text-muted"></i><em class="text-muted"> Created: {{ formatDate(request.time_stamp) }}</em></small>
+                          <div class="timeline-body">
+                           <p class="pull-right"><small><i class="fa fa-clock-o text-muted"></i><em><font color="red"> Due: {{ formatDate(request.due_date) }}</font></em></small>
+                            </p>
+                          </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button type="button" class="pull-right btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">New Request</button>
+        </div>
+        <!-- /.panel-body -->
     </div>
     <!-- REQUEST CREATE MODAL -->
     <div
@@ -30,10 +62,10 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="requestCreateModal">New Request</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+            <h5 class="modal-title" id="requestCreateModal"><strong class="huge">New Request</strong></h5>
           </div>
           <!-- REQUEST CREATE FORM -->
           <div class="modal-body">
@@ -78,16 +110,11 @@
         </div>
       </div>
     </div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#exampleModal">
-      New Request
-    </button>
-    <!-- BACK BUTTON -->
-    <div><a href="/#/" class="btn btn-primary">Back to all Goals</a></div>
   </div>
 </template>
 
-<style></style>
+<style>
+</style>
 
 <script>
 var axios = require("axios");
@@ -157,6 +184,9 @@ export default {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
+    },
+    formatDate(date) {
+      return moment(date).format("MMMM Do YYYY, h:mm:ss a");
     }
   },
   computed: {}
