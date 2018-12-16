@@ -17,8 +17,8 @@
         <strong>Progress</strong><br>
         <span class="text-muted"><em>40% Complete</em></span><br>
       </p>
-        <div class="progress progress-striped active">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+        <div class="progress progress-striped">
+            <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                 <span class="sr-only">40% Complete (success)</span>
             </div>
         </div>
@@ -31,7 +31,7 @@
         <!-- /.panel-heading -->
         <div class="panel-body">
             <ul class="timeline">
-                <li v-for="request in goal.requests">
+                <li v-for="(request, index) in goal.requests" v-bind:class="{'timeline-inverted': index % 2 !== 0}">
                     <div class="timeline-badge"><i class="fa fa-check"></i>
                     </div>
                     <div class="timeline-panel">
