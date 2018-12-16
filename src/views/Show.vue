@@ -36,9 +36,11 @@
                     </div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
+                            <a class="fa fa-file pull-right" v-bind:href="`${request.attachment_url}`"></a>
                             <h4 class="timeline-title">{{ request.body }}</h4>
                             <small><i class="fa fa-clock-o text-muted"></i><em class="text-muted"> Created: {{ formatDate(request.time_stamp) }}</em></small>
                         </div><br>
+                        <span></span><br>
                         <div class="timeline-body">
                             <input type="checkbox" class="checkbox-primary-md"><small class="text-muted"> Complete</small>                  
                             <p class="pull-right"><small><i class="fa fa-clock-o text-muted"></i><em><font color="red"> Due: {{ formatDate(request.due_date) }}</font></em></small>
@@ -135,7 +137,7 @@ export default {
   created: function() {
     axios.get("http://localhost:3000/api/goals/" + this.$route.params.id).then(
       function(response) {
-        console.log(response.data);
+        console.log("hello world", response.data);
         this.goal = response.data;
       }.bind(this)
     );
@@ -150,6 +152,8 @@ export default {
         console.log("newRequestAttachment", this.newRequestAttachment);
       }
     },
+    openFile(filename, text) {},
+
     createRequest() {
       console.log("createRequest");
       this.errors = [];
@@ -166,9 +170,9 @@ export default {
       formData.append("due_date", document.getElementById("newRequestDueDate").value);
       formData.append("request_attachment", this.newRequestAttachment);
 
-      console.log(params);
+      console.log(formData);
       axios
-        .post("http://localhost:3000/api/requests", params)
+        .post("http://localhost:3000/api/requests", formData)
         .then(
           function(response) {
             console.log(response);
