@@ -38,10 +38,11 @@
                         <div class="timeline-heading">
                             <h4 class="timeline-title">{{ request.body }}</h4>
                             <small><i class="fa fa-clock-o text-muted"></i><em class="text-muted"> Created: {{ formatDate(request.time_stamp) }}</em></small>
-                          <div class="timeline-body">
-                           <p class="pull-right"><small><i class="fa fa-clock-o text-muted"></i><em><font color="red"> Due: {{ formatDate(request.due_date) }}</font></em></small>
-                            </p>
-                          </div>
+                        </div><br>
+                        <div class="timeline-body">
+                            <input type="checkbox" class="checkbox-primary-md"><small class="text-muted"> Complete</small>                  
+                            <p class="pull-right"><small><i class="fa fa-clock-o text-muted"></i><em><font color="red"> Due: {{ formatDate(request.due_date) }}</font></em></small>
+                          </p>
                         </div>
                     </div>
                 </li>
