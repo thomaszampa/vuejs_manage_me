@@ -54,28 +54,6 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-spotify fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">124</div>
-                            <div>New Followers!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
             <div class="panel panel-red">
                 <div class="panel-heading">
                     <div class="row">
@@ -97,6 +75,28 @@
                 </a>
             </div>
         </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-spotify fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">124</div>
+                            <div>New Followers!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
     <!-- Collapsible Panel -->
     <div class="row">
@@ -104,7 +104,7 @@
       <div class="col-md-8">
           <div class="panel panel-default">
               <div class="panel-heading">
-                <strong>GOALS</strong>
+                <i class="fa fa-tasks"></i><strong> GOALS</strong>
               </div>
               <!-- .panel-heading -->
               <div class="panel-body">
@@ -114,7 +114,7 @@
                               <h4 class="panel-title">
                                   <a data-toggle="collapse" data-parent="#accordion" :href="['#collapseOne' + goal.id]">
                                   <strong>{{ goal.subject }}</strong>
-                                  <button v-on:click="redirectToRequests(goal);" class="pull-right btn btn-primary btn-xs">Requests</button> 
+                                  <button v-on:click="redirectToRequests(goal);" class="pull-right btn btn-primary btn-xs"><strong>{{ goal.requests.length }}</strong> | Requests</button> 
                                   </a>
                               </h4>                           
                           </div>
@@ -125,7 +125,7 @@
                                   <em>Began: {{ formatDate(goal.start_date) }}</em>
                                 </div><br>
                                 <div class="pull-right text-muted small">
-                                  <em>Completed By: {{ formatDate(goal.end_date) }}</em>
+                                  <em>Complete By: {{ formatDate(goal.end_date) }}</em>
                                 </div>                              
                               </div>
 
@@ -137,8 +137,19 @@
               <!-- .panel-body -->
           </div>
       </div>
+    </div>
+    <div class="row">
       <div class="col-md-4">
-        {{ myDoughnutChart }}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-play fa-fw"></i><strong> Monthly Streaming Snapshot</strong>
+            </div>
+            <div class="panel-body">
+                <div id="morris-donut-chart"></div>
+                <a href="#" class="btn btn-default btn-block">View Details</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
       </div>
     </div>
 
@@ -224,7 +235,6 @@
 
 <script>
 import axios from "axios";
-import Chart from "chart.js";
 
 export default {
   data: function() {
@@ -246,9 +256,19 @@ export default {
       }.bind(this)
     );
   },
+
   mounted: function() {
     $("#datetimepicker1").datetimepicker({ format: "DD/MM/YY HH:mm" });
     $("#datetimepicker2").datetimepicker({ format: "DD/MM/YY HH:mm" });
+    Morris.Donut({
+      element: "morris-donut-chart",
+      data: [
+        { label: "Spotify", value: 12 },
+        { label: "Apple Music", value: 30 },
+        { label: "Amazon Music", value: 20 }
+      ],
+      colors: ["#1DB954", "#69a6f9", "#ff9900"]
+    });
   },
 
   methods: {
@@ -287,23 +307,6 @@ export default {
     },
     redirectToRequests(goal) {
       this.$router.push("/goals/" + `${goal.id}`);
-    },
-    createNewDoughnutChart() {
-      var myDoughnutChart = new Chart(ctx, {
-        type: "doughnut",
-        data: data,
-        options: options
-      });
-      data = {
-        datasets: [
-          {
-            data: [10, 20, 30]
-          }
-        ],
-
-        // These labels appear in the legend and in the tooltips when hovering different arcs
-        labels: ["Red", "Yellow", "Blue"]
-      };
     }
   }
 };

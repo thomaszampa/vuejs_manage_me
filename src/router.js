@@ -6,6 +6,7 @@ import Signup from "./views/Signup.vue";
 import Login from "./views/Login.vue";
 import Logout from "./views/Logout.vue";
 import Update from "./views/goalUpdate.vue";
+import Profile from "./views/userProfile.vue";
 
 Vue.use(Router);
 
@@ -40,6 +41,11 @@ export default new Router({
       path: "/goals/update/:id",
       name: "update",
       component: Update
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile
     }
   ]
 });

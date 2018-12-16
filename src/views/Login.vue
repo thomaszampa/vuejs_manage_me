@@ -1,8 +1,14 @@
 <template>
   <div class="login">
+    <!-- Home Header -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><strong>Login</strong></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
     <div class="container">
       <form v-on:submit.prevent="submit();">
-        <h1>Login</h1>
         <ul>
           <li class="text-danger" v-for="error in errors">{{ error }}</li>
         </ul>
