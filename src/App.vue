@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">MANAGE.ME</a>
+                <a class="navbar-brand" href="index.html"><strong>MANAGE.ME</strong></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -75,10 +75,10 @@
                             <a href="index.html"><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
+                            <a href="/#/statistics"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#"><i class="fa fa-spotify"></i> Spotify</a>
+                                    <a href="/#/statistics"><i class="fa fa-spotify"></i> Spotify</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

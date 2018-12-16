@@ -7,6 +7,7 @@ import Login from "./views/Login.vue";
 import Logout from "./views/Logout.vue";
 import Update from "./views/goalUpdate.vue";
 import Profile from "./views/userProfile.vue";
+import Statistics from "./views/Statistics.vue";
 
 Vue.use(Router);
 
@@ -46,6 +47,11 @@ export default new Router({
       path: "/profile",
       name: "profile",
       component: Profile
+    },
+    {
+      path: "/statistics",
+      name: "statistics",
+      component: Statistics
     }
   ]
 });
