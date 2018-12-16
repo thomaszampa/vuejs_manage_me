@@ -32,11 +32,17 @@
         <div class="panel-body">
             <ul class="timeline">
                 <li v-for="(request, index) in goal.requests" v-bind:class="{'timeline-inverted': index % 2 !== 0}">
-                    <div class="timeline-badge"><i class="fa fa-check"></i>
+                    <div class="timeline-badge primary"><i class="fa fa-tag"></i>
                     </div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            <a class="fa fa-file pull-right" v-bind:href="`${request.attachment_url}`"></a>
+                            <a 
+                              v-if="request.request_attachment_url"
+                              v-bind:href="`${request.request_attachment_url}`"
+                              class="fa fa-file pull-right"
+                              target="_blank"
+                            >
+                            </a>
                             <h4 class="timeline-title">{{ request.body }}</h4>
                             <small><i class="fa fa-clock-o text-muted"></i><em class="text-muted"> Created: {{ formatDate(request.time_stamp) }}</em></small>
                         </div><br>
