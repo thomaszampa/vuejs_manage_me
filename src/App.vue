@@ -48,7 +48,7 @@
                         <li><a href="/#/profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a v-on:click="logout();" href="/#/login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a v-on:click="logout();" href="/#/login"><i class="fa fa-sign-out fa-fw"></i> Login | Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -79,6 +79,12 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/#/statistics"><i class="fa fa-spotify"></i> Spotify</a>
+                                    <a href="/#/statistics"><i class="fa fa-youtube"></i> Youtube</a>
+                                    <a href="/#/statistics"><i class="fa fa-apple"></i> Apple Music</a>
+                                    <a href="/#/statistics"><i class="fa fa-amazon"></i> Amazon Music</a>
+                                    <a href="/#/statistics"><i class="fa fa-instagram"></i> Instagram</a>
+                                    <a href="/#/statistics"><i class="fa fa-facebook"></i> Facebook</a> 
+                                    <a href="/#/statistics"><i class="fa fa-twitter"></i> Twitter</a>                                   
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

@@ -118,7 +118,7 @@
                                   </a>
                               </h4>                           
                           </div>
-                          <div :id="['collapseOne' + goal.id]" class="panel-collapse collapse in">
+                          <div :id="['collapseOne' + goal.id]" class="panel-collapse collapse">
                               <div class="panel-body">
                                   {{ goal.body }}
                                 <div class="pull-right text-muted small">
