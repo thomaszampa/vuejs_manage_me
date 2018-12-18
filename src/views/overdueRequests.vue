@@ -3,10 +3,23 @@
     <!-- Home Header -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><strong>Overdue Requests</strong></h1>
+            <h1 class="page-header"><strong>Overdue Requests</strong><a href="/#/" class="btn btn-primary pull-right">Back</a></h1>
+            
         </div>
         <!-- /.col-lg-12 -->
     </div>
+    <!-- PROGRESS BAR -->
+    <div>
+      <p>
+        <strong>Progress</strong><br>
+        <span class="text-muted"><em>40% Complete</em></span><br>
+      </p>
+        <div class="progress progress-striped">
+            <div class="progress-bar progress-bar-danger active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                <span class="sr-only">40% Complete (danger)</span>
+            </div>
+        </div>
+    </div><br>
     <!-- Overdue Requests Index -->
     <div>
         <div class="row">
@@ -22,7 +35,7 @@
                       </a>
                   </div>
                   <div class="panel-body">
-                      <p>{{ overdueRequest.body }}</p>
+                      <h3>{{ overdueRequest.body }}</h3><br>
                       <small><i class="fa fa-clock-o text-muted"></i><em class="text-muted"> Created: {{ formatDate(overdueRequest.time_stamp) }}</em></small>
                   </div>
                   <div class="panel-footer">

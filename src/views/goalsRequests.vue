@@ -3,7 +3,7 @@
     <!-- Home Header -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><strong>Goals | Requests</strong></h1>
+            <h1 class="page-header"><strong>Goals | Requests</strong><a href="/#/" class="btn btn-primary pull-right">Back</a></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>

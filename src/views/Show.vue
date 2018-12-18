@@ -22,7 +22,7 @@
                 <span class="sr-only">40% Complete (success)</span>
             </div>
         </div>
-    </div>
+    </div><br>
     <!-- REQUEST INDEX TIMELINE -->
     <div class="panel panel-default">
         <div class="panel-heading">
