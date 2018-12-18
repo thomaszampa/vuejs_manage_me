@@ -50,7 +50,7 @@
                         <div class="timeline-body">
                             <input type="checkbox" class="checkbox-primary-md"><small class="text-muted"> Complete</small>                  
                             <p class="pull-right"><small><i class="fa fa-clock-o text-muted"></i><em><font color="red"> Due: {{ formatDate(request.due_date) }}</font></em></small>
-                          </p>
+                            </p>
                         </div>
                     </div>
                 </li>

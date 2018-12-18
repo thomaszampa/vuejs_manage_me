@@ -9,19 +9,30 @@
     </div>
     <!-- Overdue Requests Index -->
     <div>
-        <div class="col-lg-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    Red Panel
-                </div>
-                <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                </div>
-                <div class="panel-footer">
-                    Panel Footer
-                </div>
-            </div>
-            <!-- /.col-lg-4 -->
+        <div class="row">
+          <div v-for="overdueRequest in overdueRequests" class="col-lg-6">
+              <div class="panel panel-red">
+                  <div class="panel-heading"><i class="fa fa-tag"></i>
+                      <a 
+                        v-if="overdueRequest.request_attachment_url"
+                        v-bind:href="`${overdueRequest.request_attachment_url}`"
+                        class="fa fa-file pull-right"
+                        target="_blank"
+                      >
+                      </a>
+                  </div>
+                  <div class="panel-body">
+                      <p>{{ overdueRequest.body }}</p>
+                      <small><i class="fa fa-clock-o text-muted"></i><em class="text-muted"> Created: {{ formatDate(overdueRequest.time_stamp) }}</em></small>
+                  </div>
+                  <div class="panel-footer">
+                    <input type="checkbox" class="checkbox-primary-md"><small class="text-muted"> Complete</small>
+                    <p class="pull-right"><small><i class="fa fa-clock-o text-muted"></i><em><font color="red"> Due: {{ formatDate(overdueRequest.due_date) }}</font></em></small>
+                    </p>
+                  </div>
+              </div>
+              <!-- /.col-lg-4 -->
+          </div>
         </div>
     </div>
   </div>
@@ -57,7 +68,11 @@ export default {
     });
   },
 
-  methods: {},
+  methods: {
+    formatDate(date) {
+      return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+    }
+  },
 
   computed: {}
 };
