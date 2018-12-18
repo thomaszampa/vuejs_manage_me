@@ -144,7 +144,7 @@
                 <i class="fa fa-spotify"></i><strong> Spotify</strong>
               </div>
               <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                  <h1>Hello {{ userInfo.display_name }}</h1>
               </div>
               <div class="panel-footer">
                 <a class="btn btn-primary btn-lg btn-block" href="https://accounts.spotify.com/authorize?client_id=1b3820e9ab614deeb214ed33ca5d1922&response_type=code&redirect_uri=http://localhost:8080">Spotify | Login</a>

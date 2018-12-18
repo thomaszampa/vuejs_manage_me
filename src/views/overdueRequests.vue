@@ -12,13 +12,15 @@
     <div>
       <p>
         <strong>Progress</strong><br>
-        <span class="text-muted"><em>40% Complete</em></span><br>
+        <span class="text-muted"><em>0 of 4 Complete</em></span><br>
       </p>
         <div class="progress progress-striped">
-            <div class="progress-bar progress-bar-danger active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                <span class="sr-only">40% Complete (danger)</span>
+            <div id="progressBar" class="progress-bar progress-bar-danger active" role="progressbar" style="width: 20%">
+                <!-- aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" -->
+                <span class="sr-only"></span>
             </div>
         </div>
+        <button v-on:click="increaseProgress();">Click Me</button>
     </div><br>
     <!-- Overdue Requests Index -->
     <div>
@@ -84,6 +86,19 @@ export default {
   methods: {
     formatDate(date) {
       return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+    },
+    increaseProgress() {
+      var elem = document.getElementById("progressBar");
+      var width = 10;
+      var id = setInterval(frame, 10);
+      function frame() {
+        if (width >= 100) {
+          clearInterval(id);
+        } else {
+          width++;
+          elem.style.width = width + "%";
+        }
+      }
     }
   },
 
