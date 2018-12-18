@@ -8,6 +8,8 @@ import Logout from "./views/Logout.vue";
 import Update from "./views/goalUpdate.vue";
 import Profile from "./views/userProfile.vue";
 import Statistics from "./views/Statistics.vue";
+import overdueRequests from "./views/overdueRequests.vue";
+import goalsRequests from "./views/goalsRequests.vue";
 
 Vue.use(Router);
 
@@ -52,6 +54,16 @@ export default new Router({
       path: "/statistics",
       name: "statistics",
       component: Statistics
+    },
+    {
+      path: "/overdueRequests",
+      name: "overdueRequests",
+      component: overdueRequests
+    },
+    {
+      path: "/goalsRequests",
+      name: "goalsRequests",
+      component: goalsRequests
     }
   ]
 });

@@ -1,107 +1,16 @@
 <template>
-  <div class="home">
+  <div class="goalsRequests">
     <!-- Home Header -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><strong>Home</strong></h1>
+            <h1 class="page-header"><strong>Goals | Requests</strong></h1>
         </div>
         <!-- /.col-lg-12 -->
-    </div>
-    <!-- Header Panels -->
-    <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-tasks fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">{{ goals.length }}</div>
-                            <div>New Goals!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="/#/goalsRequests">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-tags fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">26</div>
-                            <div>New Requests!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="/#/goalsRequests">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-exclamation-triangle fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">13</div>
-                            <div>Overdue Requests!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="/#/overdueRequests">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-spotify fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">124</div>
-                            <div>New Followers!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="/#/statistics">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
     </div>
     <!-- Collapsible Panel -->
     <div class="row">
       <!-- Collapsible Goals Feed -->
-      <div class="col-md-8">
+      <div class="col-md-12">
           <div class="panel panel-default">
               <div class="panel-heading">
                 <i class="fa fa-tasks"></i><strong> GOALS</strong>
@@ -136,42 +45,6 @@
               </div>
               <!-- .panel-body -->
           </div>
-      </div>
-      <div class="col-md-4">
-        Spotify Player
-      </div>
-    </div>
-    <div class="row">
-      <div class=col-lg-12>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-play fa-fw"></i><strong> Monthly Streaming Snapshot</strong>
-                </div>
-                <div class="panel-body">
-                    <div id="morris-donut-chart"></div>
-                </div>
-                <!-- /.panel-body -->
-            </div>
-          </div>
-          <div class="col-lg-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-usd fa-fw"></i> <strong>Sales Since Freshman Release</strong>
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div id="morris-area-chart"></div>
-                </div>
-                <!-- /.panel-body -->
-            </div>
-          </div>
-        </div>
-        <div>
-          <button v-on:click="redirectToStatistics();" type="button" class="pull-right btn btn-primary btn-lg btn-block">More Statistics</button><br>
-          <span></span><br>
-        </div><br>
       </div>
     </div>
 
@@ -284,86 +157,6 @@ export default {
   mounted: function() {
     $("#datetimepicker1").datetimepicker({ format: "DD/MM/YY HH:mm" });
     $("#datetimepicker2").datetimepicker({ format: "DD/MM/YY HH:mm" });
-    Morris.Donut({
-      element: "morris-donut-chart",
-      data: [
-        { label: "Spotify", value: 12 },
-        { label: "Apple Music", value: 30 },
-        { label: "Amazon Music", value: 20 }
-      ],
-      colors: ["#1DB954", "#69a6f9", "#ff9900"]
-    });
-    Morris.Area({
-      element: "morris-area-chart",
-      data: [
-        {
-          period: "2010 Q1",
-          iTunes: 2666,
-          BandCamp: null,
-          Retail: 2647
-        },
-        {
-          period: "2010 Q2",
-          iTunes: 2778,
-          BandCamp: 2294,
-          Retail: 2441
-        },
-        {
-          period: "2010 Q3",
-          iTunes: 4912,
-          BandCamp: 1969,
-          Retail: 2501
-        },
-        {
-          period: "2010 Q4",
-          iTunes: 3767,
-          BandCamp: 3597,
-          Retail: 5689
-        },
-        {
-          period: "2011 Q1",
-          iTunes: 6810,
-          BandCamp: 1914,
-          Retail: 2293
-        },
-        {
-          period: "2011 Q2",
-          iTunes: 5670,
-          BandCamp: 4293,
-          Retail: 1881
-        },
-        {
-          period: "2011 Q3",
-          iTunes: 4820,
-          BandCamp: 3795,
-          Retail: 1588
-        },
-        {
-          period: "2011 Q4",
-          iTunes: 15073,
-          BandCamp: 5967,
-          Retail: 5175
-        },
-        {
-          period: "2012 Q1",
-          iTunes: 10687,
-          BandCamp: 4460,
-          Retail: 2028
-        },
-        {
-          period: "2012 Q2",
-          iTunes: 8432,
-          BandCamp: 5713,
-          Retail: 1791
-        }
-      ],
-      xkey: "period",
-      ykeys: ["iTunes", "BandCamp", "Retail"],
-      labels: ["iTunes", "BandCamp", "Retail"],
-      pointSize: 2,
-      hideHover: "auto",
-      resize: true
-    });
   },
 
   methods: {
@@ -402,9 +195,6 @@ export default {
     },
     redirectToRequests(goal) {
       this.$router.push("/goals/" + `${goal.id}`);
-    },
-    redirectToStatistics() {
-      this.$router.push("/statistics");
     }
   }
 };

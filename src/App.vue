@@ -72,18 +72,38 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-home fa-fw"></i> Home</a>
+                            <a href="/#/"><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
-                        <li>
-                            <a href="/#/statistics"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                        <li class="active">
+                            <a href="/#/goalsRequests"><i class="fa fa-tasks fa-fw"></i> Goals | Requests<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse in">
+                                <li>
+                                    <a href="/#/overdueRequests"><i class="fa fa-exclamation-triangle fa-fw"></i> Overdue Requests</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="active">
+                            <a href="/#/statistics" data-toggle="collapse"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse in">
                                 <li>
                                     <a href="/#/statistics"><i class="fa fa-spotify"></i> Spotify</a>
-                                    <a href="/#/statistics"><i class="fa fa-youtube"></i> Youtube</a>
+                                </li>
+                                <li>
                                     <a href="/#/statistics"><i class="fa fa-apple"></i> Apple Music</a>
+                                </li>
+                                <li>
                                     <a href="/#/statistics"><i class="fa fa-amazon"></i> Amazon Music</a>
+                                </li>
+                                <li>
+                                    <a href="/#/statistics"><i class="fa fa-youtube"></i> Youtube</a>
+                                </li>
+                                <li>
                                     <a href="/#/statistics"><i class="fa fa-instagram"></i> Instagram</a>
+                                </li>
+                                <li>
                                     <a href="/#/statistics"><i class="fa fa-facebook"></i> Facebook</a> 
+                                </li>
+                                <li> 
                                     <a href="/#/statistics"><i class="fa fa-twitter"></i> Twitter</a>                                   
                                 </li>
                             </ul>
