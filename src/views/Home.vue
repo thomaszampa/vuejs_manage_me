@@ -39,7 +39,7 @@
                             <i class="fa fa-tags fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">26</div>
+                            <div class="huge">{{ requests.length }}</div>
                             <div>New Requests!</div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                             <i class="fa fa-exclamation-triangle fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">13</div>
+                            <div class="huge"> {{ overdueRequests.length }} </div>
                             <div>Overdue Requests!</div>
                         </div>
                     </div>
@@ -263,6 +263,7 @@ export default {
     return {
       message: "manage.me",
       goals: [],
+      requests: [],
       overdueRequests: [],
       spotifyInfo: {},
       newGoalSubject: "",
@@ -273,12 +274,25 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/goals").then(
-      function(response) {
-        console.log(response.data);
-        this.goals = response.data;
-      }.bind(this)
-    );
+    var self = this;
+    axios.get("http://localhost:3000/api/goals").then(function(response) {
+      console.log(response.data);
+      self.goals = response.data;
+      self.goals.forEach(function(g) {
+        g.requests.forEach(function(r) {
+          if (r.over_due) {
+            self.overdueRequests.push(r);
+          }
+        });
+      });
+      self.goals.forEach(function(g) {
+        g.requests.forEach(function(r) {
+          self.requests.push(r);
+        });
+      });
+      console.log(self.requests);
+      console.log(self.overdueRequests);
+    });
   },
 
   mounted: function() {

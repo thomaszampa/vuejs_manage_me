@@ -7,6 +7,23 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
+    <!-- Overdue Requests Index -->
+    <div>
+        <div class="col-lg-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    Red Panel
+                </div>
+                <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                </div>
+                <div class="panel-footer">
+                    Panel Footer
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+    </div>
   </div>
 </template>
 
