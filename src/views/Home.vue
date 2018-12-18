@@ -137,10 +137,13 @@
               <!-- .panel-body -->
           </div>
       </div>
+      <!-- SPOTIFY -->
       <div class="col-md-4">
+        <h1>Hello {{ userInfo.display_name }}</h1>
         <a class="btn btn-primary" href="https://accounts.spotify.com/authorize?client_id=1b3820e9ab614deeb214ed33ca5d1922&response_type=code&redirect_uri=http://localhost:8080">Connect w/ Spotify</a>
       </div>
     </div>
+    <!-- GRAPHS -->
     <div class="row">
       <div class=col-lg-12>
         <div class="row">
@@ -265,16 +268,17 @@ export default {
       goals: [],
       requests: [],
       overdueRequests: [],
-      spotifyInfo: {},
       newGoalSubject: "",
       newGoalBody: "",
       newGoalStartDate: "",
       newGoalEndDate: "",
       spotifyAccessToken: "",
+      userInfo: {},
       errors: []
     };
   },
   created: function() {
+    // SPOTIFY AUTHENTICATION AND ACCESS TOKEN QUERY
     var queryParams = window.location.search;
     if (queryParams) {
       var code = queryParams.split("?code=")[1];
@@ -285,6 +289,20 @@ export default {
       });
     }
 
+    this.spotifyAccessToken = localStorage.getItem("spotifyAccessToken");
+
+    var spotifyRequestOptions = {
+      headers: {
+        Authorization: "Bearer " + this.spotifyAccessToken,
+        "Content-Type": "application/json"
+      }
+    };
+    axios.get("https://api.spotify.com/v1/me", spotifyRequestOptions).then(response => {
+      this.userInfo = response.data;
+      console.log(this.userInfo);
+    });
+
+    // AXIOS REQUEST FOR GOALS AND REQUESTS
     var self = this;
     axios.get("http://localhost:3000/api/goals").then(function(response) {
       console.log(response.data);
@@ -310,8 +328,10 @@ export default {
   },
 
   mounted: function() {
+    // DATETIMEPICKER FORMAT
     $("#datetimepicker1").datetimepicker({ format: "DD/MM/YY HH:mm" });
     $("#datetimepicker2").datetimepicker({ format: "DD/MM/YY HH:mm" });
+    // GRAPHICAL DUMMY DATA
     Morris.Donut({
       element: "morris-donut-chart",
       data: [
@@ -395,24 +415,7 @@ export default {
   },
 
   methods: {
-    submit: function() {
-      var spotifyRequestOptions = {
-        headers: {
-          Authorization: "Bearer " + this.spotifyAccessToken,
-          "Content-Type": "application/json"
-        }
-      };
-
-      // var userProfile = {};
-
-      // // GET USER PROFILE
-      // axios.get("https://api.spotify.com/v1/me", spotifyRequestOptions).then(response => {
-      //   userProfile = response.data;
-      //   console.log(userProfile);
-      //   return axios.get("https://api.spotify.com/v1/me", spotifyRequestOptions);
-      // });
-    },
-
+    // CREATE GOAL
     createGoal() {
       console.log("createGoal");
       this.errors = [];
@@ -443,6 +446,7 @@ export default {
           }.bind(this)
         );
     },
+    // MISC. METHODS
     formatDate(date) {
       return moment(date).format("MMMM Do YYYY, h:mm:ss a");
     },

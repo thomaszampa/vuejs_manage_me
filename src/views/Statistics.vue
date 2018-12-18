@@ -14,7 +14,6 @@ var axios = require("axios");
 export default {
   data: function() {
     return {
-      message: "Welcome to Vue.js!",
       spotifyAccessToken: null,
       userInfo: {}
     };
