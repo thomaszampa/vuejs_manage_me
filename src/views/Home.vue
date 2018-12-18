@@ -138,7 +138,7 @@
           </div>
       </div>
       <div class="col-md-4">
-        Spotify Player
+        <a class="btn btn-primary" href="https://accounts.spotify.com/authorize?client_id=1b3820e9ab614deeb214ed33ca5d1922&response_type=code&redirect_uri=http://localhost:8080">Connect w/ Spotify</a>
       </div>
     </div>
     <div class="row">
@@ -270,14 +270,26 @@ export default {
       newGoalBody: "",
       newGoalStartDate: "",
       newGoalEndDate: "",
+      spotifyAccessToken: "",
       errors: []
     };
   },
   created: function() {
+    var queryParams = window.location.search;
+    if (queryParams) {
+      var code = queryParams.split("?code=")[1];
+      axios.get("http://localhost:3000/api/spotify/callback?code=" + code).then(response => {
+        localStorage.setItem("spotifyAccessToken", response.data.token);
+        this.spotifyAccessToken = response.data.token;
+        window.location.href = "/";
+      });
+    }
+
     var self = this;
     axios.get("http://localhost:3000/api/goals").then(function(response) {
       console.log(response.data);
       self.goals = response.data;
+
       self.goals.forEach(function(g) {
         g.requests.forEach(function(r) {
           if (r.over_due) {
@@ -285,11 +297,13 @@ export default {
           }
         });
       });
+
       self.goals.forEach(function(g) {
         g.requests.forEach(function(r) {
           self.requests.push(r);
         });
       });
+
       console.log(self.requests);
       console.log(self.overdueRequests);
     });
@@ -381,6 +395,24 @@ export default {
   },
 
   methods: {
+    submit: function() {
+      var spotifyRequestOptions = {
+        headers: {
+          Authorization: "Bearer " + this.spotifyAccessToken,
+          "Content-Type": "application/json"
+        }
+      };
+
+      // var userProfile = {};
+
+      // // GET USER PROFILE
+      // axios.get("https://api.spotify.com/v1/me", spotifyRequestOptions).then(response => {
+      //   userProfile = response.data;
+      //   console.log(userProfile);
+      //   return axios.get("https://api.spotify.com/v1/me", spotifyRequestOptions);
+      // });
+    },
+
     createGoal() {
       console.log("createGoal");
       this.errors = [];
