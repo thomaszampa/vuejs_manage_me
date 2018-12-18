@@ -14,14 +14,34 @@
 </style>
 
 <script>
+var axios = require("axios");
+
 export default {
   data: function() {
     return {
-      message: "Welcome to Vue.js!"
+      goals: [],
+      overdueRequests: [],
+      errors: []
     };
   },
-  created: function() {},
+  created: function() {
+    var self = this;
+    axios.get("http://localhost:3000/api/goals").then(function(response) {
+      console.log(response.data);
+      self.goals = response.data;
+      self.goals.forEach(function(g) {
+        g.requests.forEach(function(r) {
+          if (r.over_due) {
+            self.overdueRequests.push(r);
+          }
+        });
+      });
+      console.log(self.overdueRequests);
+    });
+  },
+
   methods: {},
+
   computed: {}
 };
 </script>
