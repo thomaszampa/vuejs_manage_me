@@ -164,12 +164,6 @@ export default {
       console.log("createRequest");
       this.errors = [];
 
-      // var params = {
-      //   goal_id: this.goal.id,
-      //   body: this.newRequestBody,
-      //   due_date: document.getElementById("newRequestDueDate").value
-      // };
-
       var formData = new FormData();
       formData.append("goal_id", this.goal.id);
       formData.append("body", this.newRequestBody);
@@ -182,7 +176,7 @@ export default {
         .then(
           function(response) {
             console.log(response);
-            this.request.push(response.data);
+            this.goal.requests.push(response.data);
             this.newRequestGoalId = "";
             this.newRequestBody = "";
             this.newRequestDueDate = "";
