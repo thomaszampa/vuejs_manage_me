@@ -193,8 +193,24 @@
                       <div class="tab-pane fade" id="competition">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <img src=""><p></p>
+                                <!-- <div v-if="userTopArtists.items" class="panel-body">
+                                    <img width="125" height="125" v-bind:src="`${ userTopArtists.items[0].images[0].url }`">
+                                    <h2>{{ userTopArtists.items[0].name }}</h2>
+                                    <em><small>{{ userTopArtists.items[0].genres[0] }} | {{ userTopArtists.items[0].genres[1] }}</small></em>
+                                    <h5>Followers: {{ userTopArtists.items[0].followers.total }}</h5>
+
+                                </div> -->
+                                <div v-for="item in userTopArtists.items.slice(0, 3)" class="panel-body">
+                                  <div class="row">
+                                    <div class="col-md-5">
+                                      <img width="125" height="125" v-bind:src="`${ item.images[0].url }`">
+                                    </div>
+                                    <div class="col-md-7">
+                                      <h2>{{ item.name }}</h2>
+                                      <em><small>{{ item.genres[0] }} | {{ item.genres[1] }}</small></em>
+                                      <h5>Followers: {{ item.followers.total }}</h5>
+                                    </div>
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -337,7 +353,7 @@ export default {
       newGoalEndDate: "",
       spotifyAccessToken: "",
       userInfo: {},
-      userTopArtists: [],
+      userTopArtists: {},
       errors: []
     };
   },
@@ -368,7 +384,7 @@ export default {
 
     axios.get("https://api.spotify.com/v1/me/top/artists", spotifyRequestOptions).then(response => {
       this.userTopArtists = response.data;
-      console.log(this.userTopArtists);
+      console.log("userTopArtists", this.userTopArtists);
     });
 
     // AXIOS REQUEST FOR GOALS AND REQUESTS
