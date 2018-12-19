@@ -27,7 +27,7 @@
                       <small><i class="fa fa-clock-o text-muted"></i><em class="text-muted"> Created: {{ formatDate(overdueRequest.time_stamp) }}</em></small>
                   </div>
                   <div class="panel-footer">
-                    <input type="checkbox" class="checkbox-primary-md"><small class="text-muted"> Complete</small>
+                    <input v-on:click="updateCompleteStatus(overdueRequest);" v-model="overdueRequest.complete" type="checkbox" class="checkbox-primary-md"><small class="text-muted"> Complete</small> 
                     <p class="pull-right"><small><i class="fa fa-clock-o text-muted"></i><em><font color="red"> Due: {{ formatDate(overdueRequest.due_date) }}</font></em></small>
                     </p>
                   </div>
@@ -72,6 +72,32 @@ export default {
   methods: {
     formatDate(date) {
       return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+    },
+    updateCompleteStatus(overdueRequest) {
+      console.log("updateCompleteStatus", overdueRequest.complete);
+      this.errors = [];
+
+      var params = {
+        goal_id: overdueRequest.goal_id,
+        body: overdueRequest.body,
+        due_date: overdueRequest.due_date,
+        complete: !overdueRequest.complete
+      };
+
+      console.log(params);
+      axios
+        .patch("http://localhost:3000/api/requests/" + overdueRequest.id, params)
+        .then(
+          function(response) {
+            console.log(response);
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            console.log(error);
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
     }
   },
 
