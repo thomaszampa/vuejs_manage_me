@@ -141,7 +141,7 @@
       <div class="col-lg-4">
           <div class="panel panel-default">
               <div class="panel-heading">
-                  <i class="fa fa-spotify"></i><strong> Spotify</strong><a class="btn btn-primary btn-xs pull-right" href="https://accounts.spotify.com/authorize?client_id=1b3820e9ab614deeb214ed33ca5d1922&response_type=code&redirect_uri=http://localhost:8080">Spotify | Login</a>
+                  <i class="fa fa-spotify"></i><strong> Spotify</strong><a class="btn btn-primary btn-xs pull-right" href="https://accounts.spotify.com/authorize?client_id=1b3820e9ab614deeb214ed33ca5d1922&response_type=code&redirect_uri=http://localhost:8080&scope=user-top-read">Spotify | Login</a>
               </div>
               <!-- /.panel-heading -->
               <div class="panel-body">
@@ -149,26 +149,55 @@
                   <ul class="nav nav-tabs">
                       <li><a href="#profile" data-toggle="tab">Profile</a>
                       </li>
-                      <li><a href="#messages" data-toggle="tab">Messages</a>
+                      <li><a href="#fans" data-toggle="tab">Fans</a>
                       </li>
-                      <li><a href="#settings" data-toggle="tab">Settings</a>
+                      <li><a href="#competition" data-toggle="tab">Competition</a>
                       </li>
                   </ul><br>
 
                   <!-- Tab panes -->
                   <div class="tab-content">
                       <div class="text-center tab-pane fade" id="profile">
+                        <div v-if="userInfo.images">
                           <img v-bind:src="`${ userInfo.images[0].url }`" class="img-circle" width="100" height="100">
                           <h2>Hello {{ userInfo.display_name }}!</h2>
                           <em><small class="text-muted">Followers: {{ userInfo.followers.total }}</small></em>
+                        </div><br>
                       </div>
-                      <div class="tab-pane fade" id="messages">
-                          <h4>Messages Tab</h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                      <div class="tab-pane fade" id="fans">
+                          <div class="row text-center">
+                            <div class="col-lg-6">
+                              <div class="well">
+                                <i class="fa fa-male fa-5x"></i>
+                                <h2><strong>35%</strong></h2>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="well">
+                                <i class="fa fa-female fa-5x"></i>
+                                <h2><strong>65%</strong></h2>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row text-center">
+                            <div class="col-lg-12">
+                              <div class="well">
+                                <i class="fa fa-globe fa-5x"></i>
+                                <h2>Congratulations!</h2>
+                                <h3>You have fans supporting you all over the globe!</h3><br>
+                                <h4>USA: 60% | JAPAN: 23% | NORWAY: 17%</h4>
+                              </div>
+                            </div>
+                          </div>
                       </div>
-                      <div class="tab-pane fade" id="settings">
-                          <h4>Settings Tab</h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                      <div class="tab-pane fade" id="competition">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <img src=""><p></p>
+                                </div>
+                            </div>
+                        </div>
                       </div>
                   </div>
               </div>
@@ -308,6 +337,7 @@ export default {
       newGoalEndDate: "",
       spotifyAccessToken: "",
       userInfo: {},
+      userTopArtists: [],
       errors: []
     };
   },
@@ -334,6 +364,11 @@ export default {
     axios.get("https://api.spotify.com/v1/me", spotifyRequestOptions).then(response => {
       this.userInfo = response.data;
       console.log(this.userInfo);
+    });
+
+    axios.get("https://api.spotify.com/v1/me/top/artists", spotifyRequestOptions).then(response => {
+      this.userTopArtists = response.data;
+      console.log(this.userTopArtists);
     });
 
     // AXIOS REQUEST FOR GOALS AND REQUESTS
