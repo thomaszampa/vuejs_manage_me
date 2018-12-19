@@ -15,10 +15,10 @@
     <div>
       <p>
         <strong>Progress</strong><br>
-        <span class="text-muted"><em>40% Complete</em></span><br>
+        <span class="text-muted"><em>{{ percentComplete }}% Complete</em></span><br>
       </p>
         <div class="progress progress-striped">
-            <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+            <div class="progress-bar progress-bar-success active" role="progressbar" v-bind:aria-valuenow="percentComplete" aria-valuemin="0" aria-valuemax="100" v-bind:style="`width: ${percentComplete}%`">
                 <span class="sr-only">40% Complete (success)</span>
             </div>
         </div>
@@ -48,7 +48,7 @@
                         </div><br>
                         <span></span><br>
                         <div class="timeline-body">
-                            <input type="checkbox" class="checkbox-primary-md"><small class="text-muted"> Complete</small>                  
+                            <input v-on:click="updateCompleteStatus(request);" v-model="request.complete" type="checkbox" class="checkbox-primary-md"><small class="text-muted"> Complete</small>                  
                             <p class="pull-right"><small><i class="fa fa-clock-o text-muted"></i><em><font color="red"> Due: {{ formatDate(request.due_date) }}</font></em></small>
                             </p>
                         </div>
@@ -136,14 +136,15 @@ export default {
       newRequestGoalId: "",
       newRequestBody: "",
       newRequestDueDate: "",
-      newRequestAttachment: "",
+      newRequestAttachment: null,
+      requestCompleteStatus: "",
       errors: []
     };
   },
   created: function() {
     axios.get("http://localhost:3000/api/goals/" + this.$route.params.id).then(
       function(response) {
-        console.log("hello world", response.data);
+        console.log(response.data);
         this.goal = response.data;
       }.bind(this)
     );
@@ -168,7 +169,9 @@ export default {
       formData.append("goal_id", this.goal.id);
       formData.append("body", this.newRequestBody);
       formData.append("due_date", document.getElementById("newRequestDueDate").value);
-      formData.append("request_attachment", this.newRequestAttachment);
+      if (this.newRequestAttachment) {
+        formData.append("request_attachment", this.newRequestAttachment);
+      }
 
       console.log(formData);
       axios
@@ -192,8 +195,50 @@ export default {
     },
     formatDate(date) {
       return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+    },
+    updateCompleteStatus(request) {
+      console.log("updateCompleteStatus", request.complete);
+      this.errors = [];
+
+      var params = {
+        goal_id: request.goal_id,
+        body: request.body,
+        due_date: request.due_date,
+        complete: !request.complete
+      };
+
+      console.log(params);
+      axios
+        .patch("http://localhost:3000/api/requests/" + request.id, params)
+        .then(
+          function(response) {
+            console.log(response);
+            this.requests.push(response.data);
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            console.log(error);
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
     }
   },
-  computed: {}
+  computed: {
+    percentComplete: function() {
+      if (this.goal.requests) {
+        var numComplete = 0;
+        this.goal.requests.forEach(request => {
+          if (request.complete) {
+            numComplete += 1;
+          }
+        });
+        var percent = (100 * numComplete) / this.goal.requests.length;
+        return Math.round(percent);
+      } else {
+        return 0;
+      }
+    }
+  }
 };
 </script>

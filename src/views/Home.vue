@@ -138,7 +138,7 @@
           </div>
       </div>
       <!-- SPOTIFY -->
-      <div class="col-lg-4">
+<!--       <div class="col-lg-4">
           <div class="panel panel-default">
               <div class="panel-heading">
                 <i class="fa fa-spotify"></i><strong> Spotify</strong>
@@ -147,9 +147,47 @@
                   <h1>Hello {{ userInfo.display_name }}</h1>
               </div>
               <div class="panel-footer">
-                <a class="btn btn-primary btn-lg btn-block" href="https://accounts.spotify.com/authorize?client_id=1b3820e9ab614deeb214ed33ca5d1922&response_type=code&redirect_uri=http://localhost:8080">Spotify | Login</a>
+                <a class="btn btn-primary btn-lg btn-block pull-right" href="https://accounts.spotify.com/authorize?client_id=1b3820e9ab614deeb214ed33ca5d1922&response_type=code&redirect_uri=http://localhost:8080">Spotify | Login</a>
               </div>
           </div>
+      </div> -->
+      <div class="col-lg-4">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <i class="fa fa-spotify"></i><strong> Spotify</strong><a class="btn btn-primary btn-xs pull-right" href="https://accounts.spotify.com/authorize?client_id=1b3820e9ab614deeb214ed33ca5d1922&response_type=code&redirect_uri=http://localhost:8080">Spotify | Login</a>
+              </div>
+              <!-- /.panel-heading -->
+              <div class="panel-body">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs">
+                      <li><a href="#profile" data-toggle="tab">Profile</a>
+                      </li>
+                      <li><a href="#messages" data-toggle="tab">Messages</a>
+                      </li>
+                      <li><a href="#settings" data-toggle="tab">Settings</a>
+                      </li>
+                  </ul><br>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                      <div class="text-center tab-pane fade" id="profile">
+<!--                           <img v-bind:src="`${ userInfo.images[0].url }`" class="img-circle" width="100" height="100">
+ -->                          <h2>Hello {{ userInfo.display_name }}!</h2>
+<!--                           <em><small class="text-muted">Followers: {{ userInfo.followers.total }}</small></em>
+ -->                      </div>
+                      <div class="tab-pane fade" id="messages">
+                          <h4>Messages Tab</h4>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                      </div>
+                      <div class="tab-pane fade" id="settings">
+                          <h4>Settings Tab</h4>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                      </div>
+                  </div>
+              </div>
+              <!-- /.panel-body -->
+          </div>
+          <!-- /.panel -->
       </div>
     </div>
     <!-- GRAPHS -->
