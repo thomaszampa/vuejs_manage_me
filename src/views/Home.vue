@@ -144,7 +144,7 @@
                   <i class="fa fa-spotify"></i><strong> Spotify</strong><a class="btn btn-primary btn-xs pull-right" href="https://accounts.spotify.com/authorize?client_id=1b3820e9ab614deeb214ed33ca5d1922&response_type=code&redirect_uri=http://localhost:8080&scope=user-top-read">Spotify | Login</a>
               </div>
               <!-- /.panel-heading -->
-              <div class="panel-body">
+              <div class="panel-body" v-if="userInfo.images && userTopArtists.items">
                   <!-- Nav tabs -->
                   <ul class="nav nav-tabs">
                       <li><a href="#profile" data-toggle="tab">Profile</a>

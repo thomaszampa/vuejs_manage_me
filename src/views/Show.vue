@@ -26,12 +26,12 @@
     <!-- REQUEST INDEX TIMELINE -->
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-clock-o fa-fw"></i><strong>Request Timeline</strong>
+            <i class="fa fa-clock-o fa-fw"></i><strong>Request Timeline</strong><em class="pull-right"><small class="text-muted">Order by: </small><button v-on:click="setSortAttributeTimeStamp();" class="btn btn-primary btn-xs">Created</button><button v-on:click="setSortAttributeDueDate();" class="btn btn-primary btn-xs">Due</button></em>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
             <ul class="timeline">
-                <li v-for="(request, index) in goal.requests" v-bind:class="{'timeline-inverted': index % 2 !== 0}">
+                <li v-for="(request, index) in orderBy(goal.requests, sortAttribute, -1)" v-bind:class="{'timeline-inverted': index % 2 !== 0}">
                     <div class="timeline-badge primary"><i class="fa fa-tag"></i>
                     </div>
                     <div class="timeline-panel">
@@ -127,8 +127,11 @@
 
 <script>
 var axios = require("axios");
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
+
   data: function() {
     return {
       goal: {},
@@ -138,16 +141,25 @@ export default {
       newRequestDueDate: "",
       newRequestAttachment: null,
       requestCompleteStatus: "",
+      sortAttribute: "",
+      due_dates: [],
+      created_dates: [],
       errors: []
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/goals/" + this.$route.params.id).then(
-      function(response) {
-        console.log(response.data);
-        this.goal = response.data;
-      }.bind(this)
-    );
+    console.log("test", this.orderBy);
+    var self = this;
+    axios.get("http://localhost:3000/api/goals/" + this.$route.params.id).then(function(response) {
+      console.log(response.data);
+      self.goal = response.data;
+      self.goal.requests.forEach(function(r) {
+        self.due_dates.push(r.due_date);
+        self.created_dates.push(r.time_stamp);
+      });
+      console.log("due_dates", self.due_dates);
+      console.log("created_dates", self.created_dates);
+    });
   },
   mounted: function() {
     $("#datetimepicker1").datetimepicker({ format: "DD/MM/YY HH:mm" });
@@ -222,6 +234,12 @@ export default {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
+    },
+    setSortAttributeTimeStamp() {
+      this.sortAttribute = "time_stamp";
+    },
+    setSortAttributeDueDate() {
+      this.sortAttribute = "due_date";
     }
   },
   computed: {
