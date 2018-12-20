@@ -26,7 +26,21 @@
     <!-- REQUEST INDEX TIMELINE -->
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-clock-o fa-fw"></i><strong>Request Timeline</strong><em class="pull-right"><small class="text-muted">Order by: </small><button v-on:click="setSortAttributeTimeStamp();" class="btn btn-primary btn-xs">Created</button><button v-on:click="setSortAttributeDueDate();" class="btn btn-primary btn-xs">Due</button></em>
+            <i class="fa fa-clock-o fa-fw"></i>
+            <strong>Request Timeline</strong>
+            <!-- Sort Attributes -->
+            <em class="pull-right"><small class="text-muted">Order by: </small> 
+              <div class="btn-group btn-group-toggle pull-right" data-toggle="buttons">
+                <label v-on:click="setSortAttributeTimeStamp();" class="btn-primary btn-xs btn btn-secondary active">
+                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Created
+                </label>
+                <label v-on:click="setSortAttributeDueDate();" class="btn-primary btn-xs btn btn-secondary">
+                  <input type="radio" name="options" id="option2" autocomplete="off"> Due
+                </label>
+              </div>
+            </em>
+<!--             <em class="pull-right"><small class="text-muted">Order by: </small>
+              <button v-on:click="setSortAttributeTimeStamp();" class="btn btn-primary btn-xs">Created</button><button v-on:click="setSortAttributeDueDate();" class="btn btn-primary btn-xs">Due</button></em> -->
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
