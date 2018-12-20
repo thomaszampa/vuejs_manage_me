@@ -246,7 +246,7 @@
           </div>
         </div>
         <div>
-          <button v-on:click="redirectToStatistics();" type="button" class="pull-right btn btn-primary btn-lg btn-block">More Statistics</button><br>
+          <button type="button" class="pull-right btn btn-primary btn-lg btn-block">More Statistics</button><br>
           <span></span><br>
         </div><br>
       </div>

@@ -44,7 +44,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="/#/profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li><a v-on:click="logout();" href="/#/login"><i class="fa fa-sign-out fa-fw"></i> Login | Logout</a>
@@ -82,28 +82,28 @@
                             </ul>
                         </li>
                         <li class="active">
-                            <a href="/#/statistics" data-toggle="collapse"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
+                            <a data-toggle="collapse"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse in">
                                 <li>
-                                    <a href="/#/statistics"><i class="fa fa-spotify"></i> Spotify</a>
+                                    <a><i class="fa fa-spotify"></i> Spotify</a>
                                 </li>
                                 <li>
-                                    <a href="/#/statistics"><i class="fa fa-apple"></i> Apple Music</a>
+                                    <a><i class="fa fa-apple"></i> Apple Music</a>
                                 </li>
                                 <li>
-                                    <a href="/#/statistics"><i class="fa fa-amazon"></i> Amazon Music</a>
+                                    <a><i class="fa fa-amazon"></i> Amazon Music</a>
                                 </li>
                                 <li>
-                                    <a href="/#/statistics"><i class="fa fa-youtube"></i> Youtube</a>
+                                    <a><i class="fa fa-youtube"></i> Youtube</a>
                                 </li>
                                 <li>
-                                    <a href="/#/statistics"><i class="fa fa-instagram"></i> Instagram</a>
+                                    <a><i class="fa fa-instagram"></i> Instagram</a>
                                 </li>
                                 <li>
-                                    <a href="/#/statistics"><i class="fa fa-facebook"></i> Facebook</a> 
+                                    <a><i class="fa fa-facebook"></i> Facebook</a> 
                                 </li>
                                 <li> 
-                                    <a href="/#/statistics"><i class="fa fa-twitter"></i> Twitter</a>                                   
+                                    <a><i class="fa fa-twitter"></i> Twitter</a>                                   
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

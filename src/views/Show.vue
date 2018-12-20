@@ -39,8 +39,6 @@
                 </label>
               </div>
             </em>
-<!--             <em class="pull-right"><small class="text-muted">Order by: </small>
-              <button v-on:click="setSortAttributeTimeStamp();" class="btn btn-primary btn-xs">Created</button><button v-on:click="setSortAttributeDueDate();" class="btn btn-primary btn-xs">Due</button></em> -->
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -58,7 +56,8 @@
                             >
                             </a>
                             <h4 class="timeline-title">{{ request.body }}</h4>
-                            <small><i class="fa fa-clock-o text-muted"></i><em class="text-muted"> Created: {{ formatDate(request.time_stamp) }}</em></small>
+                            <small><i class="fa fa-clock-o text-muted"></i><em class="text-muted"> <strong> Created:</strong> {{ formatDate(request.time_stamp) }}</em></small><br>
+                            <small><i class="fa fa-user text-muted"></i><em class="text-muted"><strong> By: </strong> {{ request.user_first }} {{ request.user_last }} </em></small>
                         </div><br>
                         <span></span><br>
                         <div class="timeline-body">
@@ -220,7 +219,7 @@ export default {
         );
     },
     formatDate(date) {
-      return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+      return moment(date).format("MMMM Do YYYY, h:mm a");
     },
     updateCompleteStatus(request) {
       console.log("updateCompleteStatus", request.complete);
